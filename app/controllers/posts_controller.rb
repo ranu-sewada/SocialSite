@@ -124,6 +124,13 @@ class PostsController < ApplicationController
     end
   end
 
+  def delete_comment
+    @comnt = Comment.find(params[:id])
+    if @comnt.destroy
+      redirect_to(show_all_comments_post_path(@comnt.post))
+    end
+  end
+
   def show_all_comments
     # @comments = Comment.all
     @comment = Comment.new

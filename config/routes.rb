@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       get :new_comment
       post :create_new_comment
       get :show_all_comments
+      get :delete_comment
     end
   end
   devise_for :users, :controllers => {:registrations => "users/registrations"}

@@ -17,7 +17,7 @@
         <td><%= gravatar_for comment.user %><%= comment.user.username %></td>
         <td><%= comment.content %></td>
         <% if check_for_delete?(comment) || (current_user.has_role? :admin) %>
-          <td><%= link_to 'Delete','#' %></td>
+            <td><%= link_to 'Delete', delete_comment_post_path(comment) %></td>
         <% end%>
       </tr>
     <% end %>
