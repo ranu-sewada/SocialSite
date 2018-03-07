@@ -1,0 +1,64 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+/* forms */
+
+input, textarea, select, .uneditable-input {
+ border: 1px solid #bbb;
+ width: 100%;
+ margin-bottom: 15px;
+
+}
+
+input {
+ height: auto !important;
+}
+
+.margin{
+ margin: 90px;
+}
+
+table {
+ width: 100%;
+}
+
+/* universal */
+
+body{
+	padding-top: 60px;
+}
+
+textarea {
+  resize: vertical;
+}
+
+section{
+	overflow: auto;
+}
+
+.center{
+	text-align: center;
+}
+
+.center h1 {
+	margin-button: 10px;
+}
+
+
+/* header */
+
+#logo {
+  float: left;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  font-weight: bold;
+}
+
+#logo:hover {
+  color: #fff;
+  text-decoration: none;
+}

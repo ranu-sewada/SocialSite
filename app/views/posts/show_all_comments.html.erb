@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+<h1>All Comments</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Content</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td> <%= @current_post.content %></td>
+  </tr>
+  <% if !@comments.nil? %>
+    <% @comments.each do |comment| %>
+      <tr>
+        <td><%= gravatar_for comment.user %><%= comment.user.username %></td>
+        <td><%= comment.content %></td>
+        <% if check_for_delete?(comment) || (current_user.has_role? :admin) %>
+          <td><%= link_to 'Delete','#' %></td>
+        <% end%>
+      </tr>
+    <% end %>
+    <tr>
+      <td>
+        <%= form_for(@comment,url:create_new_comment_post_path) do |f| %>
+          <%= f.hidden_field :user_id, :value => current_user.id  %>
+          <%= f.hidden_field :post_id, :value => @current_post.id%>
+          <h3><%= f.label :Create_Comment %></h3>
+          <%= f.text_field :content%>
+          <%= f.submit "Create ", class: "btn btn-primary" %>
+        <% end %>
+      <td>
+    </tr>
+  <% else %>
+  <% end %>
+  </tbody>
+</table>
+
+
+

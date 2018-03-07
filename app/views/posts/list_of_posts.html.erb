@@ -1,0 +1,53 @@
+<p id="notice"><%= notice %></p>
+
+
+<h1><%= gravatar_for @c_user %><%= @c_user.username %></h1></br></br>
+
+<table>
+  <thead>
+    <tr>
+      <th>Content</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <% if !@posts.nil?%>
+    <%= paginate @posts %>
+      <% @posts.each do |post| %>
+        <tr>
+          <td><%= post.content %></td>
+
+          <% if current_user.id == @c_user.id || (current_user.has_role? :admin)%>
+          <!--  <td><%= link_to 'Show', post %></td> -->
+          <td><%= link_to 'Edit', edit_post_path(post) %></td>
+          <td><%= link_to 'Destroy', post_path(post), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+           <td><%= link_to 'Show', show_all_comments_post_path(post) %></td>
+          <% end %>
+           <% cuser = @c_user%>
+             <% if !(current_user.has_role? :admin) %>
+           <% if check_for_friend?(cuser.id)%>
+
+          <td><%= link_to 'Show', show_all_comments_post_path(post) %></td>
+            <% end %>
+           <% end %>
+          <% if check_for_like?(post.id)%>
+          <td><%= link_to 'Like', like_post_path(post) %></td>
+          <% else %>
+            <td><%= link_to 'DisLike', dislike_post_path(post) %></td>
+          <% end %>
+           <td>(<%= like_count?(post.id)%>)</td>
+        </tr>
+      <% end %>
+    <% else%>
+     <tr> <td>There is no post!!!!</td></tr>
+   <% end %>
+  </tbody>
+</table>
+
+<br>
+<% if current_user.id == @c_user.id%>
+
+<%= link_to 'New Post', new_post_path %>
+<% end %>

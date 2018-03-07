@@ -1,0 +1,62 @@
+<table class="users">
+
+  <h1>All Users</h1>
+ <%= paginate @users %>
+ <% @sfr.each do |user| %>
+
+      <tr>
+        <td><%= gravatar_for user %></td> <td></td>
+        <td>
+          <%= link_to list_of_posts_post_path(user) do %>
+          <%= user.username %>
+          <% end %>
+        </td>
+            <td><%= link_to 'Send Friend Request', send_friend_request_user_path(user)%></td>
+      </tr>
+ <%end%>
+ <% @f.each do |user| %>
+
+      <tr>
+        <td><%= gravatar_for user %></td> <td></td>
+
+        <td>
+          <%= link_to list_of_posts_post_path(user) do %>
+          <%= user.username %>
+          <% end %>
+        </td>
+
+            <td>Friend</td>
+      </tr>
+ <%end%>
+
+ <% @cfr.each do |user| %>
+
+      <tr>
+        <td><%= gravatar_for user %></td> <td></td>
+        <td>
+          <%= link_to list_of_posts_post_path(user) do %>
+          <%= user.username %>
+          <% end %>
+        </td>
+            <td><%= link_to 'Cancel Friend Request', cancel_friend_request_user_path(user)%></td>
+      </tr>
+ <%end%>
+
+ <% @mt.each do |user| %>
+
+      <tr>
+        <td><%= gravatar_for user %></td> <td></td>
+        <td>
+          <%= link_to posts_path(user) do %>
+          <%= user.username %>
+          <% end %>
+        </td>
+        <td></td> <td></td>
+
+            <!-- <td><%= link_to 'Accept', confirm_user_path(user)%></td>
+             <td><%= link_to 'Reject', reject_user_path(user)%></td> -->
+      </tr>
+ <%end%>
+
+
+</table>

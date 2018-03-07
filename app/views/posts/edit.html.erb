@@ -1,0 +1,21 @@
+<h1>Editing Post</h1>
+
+<%= form_for(@post) do |form| %>
+
+  <div class="field">
+
+    <%= form.hidden_field :user_id, :value => params[:id]  %>
+  </div>
+
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_field :content, id: :post_content %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<%= link_to 'Show', @post %> |
+<%= link_to 'Back', posts_path %>
