@@ -26,7 +26,7 @@ Rails.application.configure do
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
 
-  config.action_mailer.default_url_options = { host: 'sheltered-ravine-58648.herokuapp.com' }
+  config.action_mailer.default_url_options = { host: 'fathomless-reef-36386.herokuapp.com' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
