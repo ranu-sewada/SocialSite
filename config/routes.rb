@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       get :send_friend_request
       get :cancel_friend_request
       get :all_friend_requests
+      get :all_friends
       get :confirm
       get :reject
     end

@@ -54,6 +54,26 @@ class UsersController < ApplicationController
     end
   end
 
+  def all_friends
+    @fm = []
+    @users = User.all
+    @users.each do |user|
+       if current_user.id == user.id
+
+       else
+         friend = current_user.friend.where( :friend_id => user.id).first
+         usr = Friend.where(:user_id => user.id, :friend_id => current_user.id).first
+         if !friend.nil?
+         @fm.push(friend.user)
+         end
+         if !usr.nil?
+         @fm.push(usr.user)
+         end
+      end
+     end
+
+  end
+
   def confirm
 
     fr_confirm = Friend.new(user_id:  current_user.id, friend_id: params[:id])

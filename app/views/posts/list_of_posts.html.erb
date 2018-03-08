@@ -1,8 +1,13 @@
 <p id="notice"><%= notice %></p>
 
 
-<h1><%= gravatar_for @c_user %><%= @c_user.username %></h1></br></br>
+<h1><%= gravatar_for @c_user %><%= @c_user.username %> &nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<% if current_user.id == @c_user.id%>
 
+<%= link_to 'New Post', new_post_path %>
+<% end %>
+</h1>
 <table>
   <thead>
     <tr>
@@ -46,8 +51,3 @@
   </tbody>
 </table>
 
-<br>
-<% if current_user.id == @c_user.id%>
-
-<%= link_to 'New Post', new_post_path %>
-<% end %>
