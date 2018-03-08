@@ -56,16 +56,16 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     # @post.user = current_user
-      if @post.update_attributes(post_update_params)
+    if @post.update_attributes(post_update_params)
 
-        redirect_to list_of_posts_post_path(current_user), notice: 'Post was successfully created.'
-        # format.html { redirect_to @post, notice: 'Post was successfully updated.' }
-        # format.json { render :show, status: :ok, location: @post }
-      else
-        redirect_to root_url
-        # format.html { render :edit }
-        # format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
+      redirect_to list_of_posts_post_path(current_user), notice: 'Post was successfully created.'
+      # format.html { redirect_to @post, notice: 'Post was successfully updated.' }
+      # format.json { render :show, status: :ok, location: @post }
+    else
+      redirect_to root_url
+      # format.html { render :edit }
+      # format.json { render json: @post.errors, status: :unprocessable_entity }
+    end
 
   end
 

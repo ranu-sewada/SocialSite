@@ -1,5 +1,6 @@
 <table class="users">
  <h1>All Friend Requests</h1>
+ <%= paginate @frs, :remote => true %>
  <% @frs.each do |fr| %>
    <tr>
       <td><%= gravatar_for fr %></td> <td></td>

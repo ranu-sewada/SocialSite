@@ -50,6 +50,7 @@ class UsersController < ApplicationController
     fr_req.each do |fr|
      @frs.push(fr.user)
     end
+    @frs = Kaminari.paginate_array(@frs).page(params[:page]).per(5)
   end
 
   def all_friends
@@ -62,10 +63,10 @@ class UsersController < ApplicationController
        friend = current_user.friend.where( :friend_id => user.id).first
        usr = Friend.where(:user_id => user.id, :friend_id => current_user.id).first
        if !friend.nil?
-       @fm.push(friend.user)
+       @fm.push(user)
        end
        if !usr.nil?
-       @fm.push(usr.user)
+       @fm.push(user)
        end
       end
     end
