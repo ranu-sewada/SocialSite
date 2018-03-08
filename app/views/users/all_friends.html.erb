@@ -3,6 +3,7 @@
  <div class="col-md-6 col-md-offset-3">
 <h1>All Friends</h1>
 <table class="users">
+<%= paginate @fm, :remote => true %>
  <% @fm.each do |user| %>
     <tr>
      <td><%= link_to gravatar_for(user, size: 50)%></td>

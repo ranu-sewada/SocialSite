@@ -70,6 +70,7 @@ class UsersController < ApplicationController
        end
       end
     end
+    @fm = Kaminari.paginate_array(@fm).page(params[:page]).per(5)
 
   end
 
