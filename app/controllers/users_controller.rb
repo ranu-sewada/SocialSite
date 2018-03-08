@@ -30,8 +30,6 @@ class UsersController < ApplicationController
 
            end
 
-
-
         else
           if !friend.nil?
           @f.push(user)
@@ -58,53 +56,47 @@ class UsersController < ApplicationController
     @fm = []
     @users = User.all
     @users.each do |user|
-       if current_user.id == user.id
+      if current_user.id == user.id
 
-       else
-         friend = current_user.friend.where( :friend_id => user.id).first
-         usr = Friend.where(:user_id => user.id, :friend_id => current_user.id).first
-         if !friend.nil?
-         @fm.push(friend.user)
-         end
-         if !usr.nil?
-         @fm.push(usr.user)
-         end
+      else
+       friend = current_user.friend.where( :friend_id => user.id).first
+       usr = Friend.where(:user_id => user.id, :friend_id => current_user.id).first
+       if !friend.nil?
+       @fm.push(friend.user)
+       end
+       if !usr.nil?
+       @fm.push(usr.user)
+       end
       end
-     end
+    end
 
   end
 
   def confirm
-
-    fr_confirm = Friend.new(user_id:  current_user.id, friend_id: params[:id])
-     if fr_confirm.save
-        fr_req_s = FriendRequest.where(:user_id => params[:id], :friend_id => current_user.id).first
-         if !fr_req_s.nil?
-            fr_req_s.destroy
-            redirect_to(root_url)
-         # else
-         #    fr_req_ss = FriendRequest.where(:user_id => current_user.id, :friend_id => params[:id]).first
-         #    fr_req_ss.destroy
-         #    redirect_to(root_url)
-          end
-     else
-      flash[:notice] = "You confirmed it, Already. "
-      redirect_to(root_url)
-     end
-
+   fr_confirm = Friend.new(user_id:  current_user.id, friend_id: params[:id])
+   if fr_confirm.save
+      fr_req_s = FriendRequest.where(:user_id => params[:id], :friend_id => current_user.id).first
+      if !fr_req_s.nil?
+          fr_req_s.destroy
+          redirect_to(root_url)
+      end
+   else
+    flash[:notice] = "You confirmed it, Already. "
+    redirect_to(root_url)
+   end
   end
 
   def reject
-    @user = User.find(params[:id])
-    fr_req_s = FriendRequest.where(:user_id => params[:id], :friend_id => current_user.id).first
-         if !fr_req_s.nil?
-            fr_req_s.destroy
-            redirect_to(root_url)
-         else
-            fr_req_ss = FriendRequest.where(:user_id => current_user.id, :friend_id => params[:id]).first
-            fr_req_ss.destroy
-            redirect_to(root_url)
-          end
+   @user = User.find(params[:id])
+   fr_req_s = FriendRequest.where(:user_id => params[:id], :friend_id => current_user.id).first
+   if !fr_req_s.nil?
+      fr_req_s.destroy
+      redirect_to(root_url)
+   else
+      fr_req_ss = FriendRequest.where(:user_id => current_user.id, :friend_id => params[:id]).first
+      fr_req_ss.destroy
+      redirect_to(root_url)
+    end
   end
 
 

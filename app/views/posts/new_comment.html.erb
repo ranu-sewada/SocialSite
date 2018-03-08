@@ -1,19 +1,12 @@
 <% #provide(:title, 'Sign up') %>
 <div class="margin">
-
-
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-
       <%= form_for(@comment,url:create_new_comment_post_path) do |f| %>
       <%= f.hidden_field :user_id, :value => current_user.id  %>
       <%= f.hidden_field :post_id, :value => @current_post.id%>
-
       <h1>  <%= f.label :Comment %></h1>
         <%= f.text_field :content%>
-
-
-
         <%= f.submit "Create ", class: "btn btn-primary" %>
       <% end %>
     </div>

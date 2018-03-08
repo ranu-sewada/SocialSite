@@ -75,10 +75,6 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.destroy
     redirect_to list_of_posts_post_path(current_user)
-    # respond_to do |format|
-    #   format.html { , notice: 'Post was successfully destroyed.' }
-    #   format.json { head :no_content }
-    # end
 
   end
 
@@ -132,19 +128,16 @@ class PostsController < ApplicationController
   end
 
   def show_all_comments
-    # @comments = Comment.all
+
     @comment = Comment.new
 
     @current_post = Post.find(params[:id])
     @comments = @current_post.comments
-     @post_content = @current_post.content
+    @post_content = @current_post.content
 
     if @current_post.nil?
       puts "---------------------------------------------------"
-
     end
-     puts "++++++++++++++++++++++++++++++++++++++++++++=++++"
-     puts @current_post.content
   end
 
 
