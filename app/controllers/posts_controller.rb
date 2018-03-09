@@ -14,10 +14,10 @@ class PostsController < ApplicationController
   def list_of_posts
     @c_user = User.find(params[:id])
     @posts = @c_user.posts.page(params[:page]).per(5)
+
   end
 
-  # GET /posts/1
-  # GET /posts/1.json
+
   def show
     @post = Post.find(params[:id])
   end
@@ -39,7 +39,6 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = current_user.posts.new(post_params)
-    # @post.user = current_user
     respond_to do |format|
       if @post.save
         format.html { redirect_to list_of_posts_post_path(@post.user), notice: 'Post was successfully created.' }
@@ -75,33 +74,41 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.destroy
     redirect_to list_of_posts_post_path(current_user)
-
   end
 
   def like
-   @post = Post.find(params[:id])
-
-   @status = Status.new(post_id:  @post.id, user_id: current_user.id, like: true)
+   @po = Post.find(params[:id])
+   @status = Status.new(post_id:  @po.id, user_id: current_user.id, like: true)
    if @status.save
-      redirect_to(list_of_posts_post_path(@post.user))
+      respond_to do |format|
+        format.html { redirect_to list_of_posts_post_path(@po.user) }
+        format.js
+      end
     else
-      flash[:notice] = "There is problem to like a post"
-      redirect_to(@post)
+      respond_to do |format|
+        format.html do
+          flash[:notice] = "There is problem to like a post"
+          redirect_to(@po)
+        end
+        format.js
+      end
+
    end
   end
 
 
 
   def dislike
-    @post = Post.find(params[:id])
-     @dis = Status.all.where(:post_id => @post.id, :user_id => current_user.id, :like => true).first
-    # @dis = current_user.statuses.where(:post_id => @post_id).first
+    @po = Post.find(params[:id])
+     @dis = Status.all.where(:post_id => @po.id, :user_id => current_user.id, :like => true).first
     if !@dis.nil?
       if @dis.destroy
-        flash[:notice] = "You have disliked post"
-        redirect_to(list_of_posts_post_path(@post.user))
+        respond_to do |format|
+          format.html { redirect_to list_of_posts_post_path(@po.user) }
+          format.js
+        end
       else
-        redirect_to(@post)
+        redirect_to(@po)
       end
     else
 

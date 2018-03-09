@@ -1,0 +1,7 @@
+<div class="like_form"  id= '<%= @p %>'>
+<% if check_for_like?(@p)%>
+    <%= render 'like' %>
+<% else %>
+    <%= render 'dislike' %>
+<% end %>
+</div>
